@@ -30,17 +30,14 @@ const App = () => {
   useEffect(() => {
     let result = [...products];
 
-    // Filter by category
     if (categoryFilter.length > 0) {
       result = result.filter((p) => categoryFilter.includes(p.category));
     }
 
-    // Filter by price range
     result = result.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
-    // Search filter
     if (searchTerm) {
       result = result.filter((p) =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -51,38 +48,50 @@ const App = () => {
     setCurrentPage(1);
   }, [products, categoryFilter, priceRange, searchTerm]);
 
-  // Pagination logic
   const indexOfLast = currentPage * PRODUCTS_PER_PAGE;
   const indexOfFirst = indexOfLast - PRODUCTS_PER_PAGE;
   const currentItems = filteredProducts.slice(indexOfFirst, indexOfLast);
 
   return (
-    <div className="p-4 max-w-7xl mx-auto">
-      <Search setSearchTerm={setSearchTerm} />
-      <div className="flex flex-col md:flex-row gap-4 mt-4">
-        <Filters
-          products={products}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-        />
-        <div className="flex-1">
-          {loading ? (
-            <Loader />
-          ) : currentItems.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <>
-              <ProductGrid products={currentItems} />
-              <Pagination
-                currentPage={currentPage}
-                totalItems={filteredProducts.length}
-                itemsPerPage={PRODUCTS_PER_PAGE}
-                setCurrentPage={setCurrentPage}
-              />
-            </>
-          )}
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <header className="text-center">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Product Listing
+          </h1>
+          <p className="text-sm text-gray-500">
+            Browse and filter our products
+          </p>
+        </header>
+
+        <Search setSearchTerm={setSearchTerm} />
+
+        <div className="flex flex-col md:flex-row gap-6">
+          <Filters
+            products={products}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+          />
+
+          <main className="flex-1">
+            {loading ? (
+              <Loader />
+            ) : currentItems.length === 0 ? (
+              <EmptyState />
+            ) : (
+              <div className="space-y-6">
+                <ProductGrid products={currentItems} />
+                <Pagination
+                  currentPage={currentPage}
+                  totalItems={filteredProducts.length}
+                  itemsPerPage={PRODUCTS_PER_PAGE}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            )}
+          </main>
         </div>
       </div>
     </div>
