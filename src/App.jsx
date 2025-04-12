@@ -5,7 +5,7 @@ import Pagination from "./components/Pagination";
 import Loader from "./components/Loader";
 import EmptyState from "./components/EmptyState";
 import { mockProducts } from "./utils/mockData";
-import ProductGrid from "./components/productGrid";
+import Product from "./components/product";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -82,7 +82,7 @@ const App = () => {
               <EmptyState />
             ) : (
               <div className="space-y-6">
-                <ProductGrid products={currentItems} />
+                <Product products={currentItems} />
                 <Pagination
                   currentPage={currentPage}
                   totalItems={filteredProducts.length}

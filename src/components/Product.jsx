@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductGrid = ({ products }) => {
+const Product = ({ products }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {products.map((product) => (
@@ -17,4 +17,4 @@ const ProductGrid = ({ products }) => {
   );
 };
 
-export default ProductGrid;
+export default Product;
