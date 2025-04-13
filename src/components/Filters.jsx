@@ -39,7 +39,7 @@ const Filters = ({
         ))}
       </div>
       <div>
-        <h3 className="font-semibold mb-2">Max Price: ${priceRange[1]}</h3>
+        <h3 className="font-semibold mb-2">Max Price: ₹{priceRange[1]}</h3>
         <input
           type="range"
           min="0"
