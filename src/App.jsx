@@ -17,7 +17,6 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const PRODUCTS_PER_PAGE = 8;
 
-  // Simulate fetching products from /products API
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -26,7 +25,6 @@ const App = () => {
     }, 1000);
   }, []);
 
-  // Apply filters and search
   useEffect(() => {
     let result = [...products];
 
